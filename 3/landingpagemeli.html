@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAVG Finanzcoaching - Ihr Partner für finanzielle Freiheit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Gelb-Weiß Farbpalette */
+        :root {
+            --primary-yellow: #FFC107;
+            --dark-yellow: #FFA000;
+            --light-yellow: #FFF8E1;
+            --dark-gray: #333333;
+            --medium-gray: #666666;
+            --light-gray: #f5f5f5;
+            --pure-white: #ffffff;
+        }
+        
+        /* Grundlegendes Reset & Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--pure-white);
+        }
+        
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            background-color: var(--pure-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 90%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            padding: 0 15px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-yellow);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--dark-yellow);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero-Bereich */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('teaser-zentrale-hochformat.jpg') center/cover;
+            text-align: center;
+            color: var(--pure-white);
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero-content .subheading {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-yellow);
+            color: var(--dark-gray);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-yellow);
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--pure-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Finanzcoaching-Bereich */
+        .finance-coaching {
+            padding: 100px 5%;
+            text-align: center;
+            background-color: var(--pure-white);
+        }
+        
+        .coaching-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+        
+        .coaching-header h3 {
+            font-size: 1.8rem;
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+        }
+        
+        .rating {
+            background-color: var(--light-yellow);
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-bottom: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .rating .stars {
+            color: #FFA000;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+        }
+        
+        /* Vorteile-Bereich */
+        .advantages-section {
+            padding: 100px 5%;
+            background-color: var(--pure-white);
+            text-align: center;
+        }
+        
+        .advantages-header {
+            margin-bottom: 60px;
+        }
+        
+        .advantages-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+        
+        .advantages-header h3 {
+            font-size: 1.8rem;
+            color: var(--dark-gray);
+        }
+        
+        .advantages-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .advantage-box {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .advantage-icon {
+            font-size: 3rem;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .advantage-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .advantage-box h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+        }
+
+        /* Euro-Hand Icon Styling */
+        .euro-hand-icon {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+        
+        .euro-hand-icon .fa-hand {
+            position: absolute;
+            font-size: 3.5rem;
+            color: var(--primary-yellow);
+            z-index: 2;
+            transform: rotate(-30deg);
+        }
+        
+        .euro-hand-icon .fa-euro-sign {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--dark-gray);
+            top: 25px;
+            left: 25px;
+            z-index: 1;
+        }
+        
+        /* Kundenerfolge */
+        .customer-success {
+            padding: 100px 5%;
+            background-color: var(--light-gray);
+        }
+        
+        .success-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .success-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+        }
+        
+        .success-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--medium-gray);
+        }
+        
+        .benefits-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .benefit-box {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: var(--pure-white);
+            text-align: left;
+            position: relative;
+            padding-left: 60px;
+            transition: transform 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary-yellow);
+        }
+        
+        .benefit-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .benefit-box:before {
+            content: "✓";
+            position: absolute;
+            left: 25px;
+            top: 30px;
+            font-size: 1.8rem;
+            color: var(--primary-yellow);
+            font-weight: bold;
+        }
+        
+        .benefit-box h3 {
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+        }
+        
+        /* Social Media Bereich */
+        .social-media-section {
+            padding: 100px 5%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('teaser-social-media-hochformat.jpg') center/cover;
+            color: var(--pure-white);
+            text-align: center;
+        }
+        
+        .social-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .social-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary-yellow);
+        }
+        
+        .social-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .social-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--pure-white);
+            transition: all 0.3s;
+        }
+        
+        .social-icon i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-yellow);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .more-info-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            color: var(--pure-white);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: 2px solid var(--primary-yellow);
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .more-info-button:hover {
+            background-color: var(--primary-yellow);
+            color: var(--dark-gray);
+        }
+        
+        /* Finanzprodukte Bereich */
+        .products-section {
+            padding: 100px 5%;
+            background-color: var(--light-yellow);
+            text-align: center;
+        }
+        
+        .products-header {
+            margin-bottom: 60px;
+        }
+        
+        .products-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+        
+        .products-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--medium-gray);
+        }
+        
+        /* Slideshow Container */
+        .slideshow-container {
+            max-width: 1200px;
+            position: relative;
+            margin: auto;
+            background: var(--pure-white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        /* Slides */
+        .slide {
+            display: none;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+        
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .product-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--light-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            color: var(--primary-yellow);
+        }
+        
+        .product-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+        }
+        
+        .product-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary-yellow);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .product-features {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .product-features li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            list-style: none;
+        }
+        
+        .product-features li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-yellow);
+            font-size: 1.4rem;
+        }
+        
+        .product-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-yellow);
+            color: var(--dark-gray);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-yellow);
+            margin-top: 20px;
+        }
+        
+        .product-button:hover {
+            background-color: transparent;
+            color: var(--dark-gray);
+            transform: translateY(-3px);
+        }
+        
+        /* Special card for local office */
+        .office-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            background: var(--light-yellow);
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .office-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .office-logo {
+            max-width: 200px;
+        }
+        
+        .office-partner {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary-yellow);
+            text-align: center;
+            max-width: 200px;
+        }
+        
+        .office-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+        
+        .office-subtitle {
+            font-size: 1.4rem;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .office-details {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .office-contact {
+            background: var(--pure-white);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        /* Sports partnership card */
+        .sports-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('1751544765209_AG-ALL-632-5-S19-A34-0_917440580901.jpg') center/cover;
+            border-radius: 10px;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .sports-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+            text-align: center;
+            background: rgba(255,255,255,0.8);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        
+        .sports-subtitle {
+            font-size: 1.5rem;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            background: rgba(255,255,255,0.8);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+        
+        .sports-content {
+            background: rgba(255,255,255,0.9);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .sports-contact {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .sports-name {
+            font-weight: bold;
+        }
+        
+        .sports-partner {
+            font-size: 0.9rem;
+            color: var(--primary-yellow);
+            font-weight: bold;
+        }
+        
+        .partners-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .partner-logo {
+            max-width: 120px;
+            height: auto;
+        }
+        
+        /* Navigation arrows - OPTIMIZED POSITION */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 16px;
+            color: var(--dark-gray);
+            font-weight: bold;
+            font-size: 20px;
+            user-select: none;
+            transition: 0.3s;
+            background: rgba(255,255,255,0.7);
+            z-index: 100;
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .prev {
+            left: 15px;
+        }
+        
+        .next {
+            right: 15px;
+        }
+        
+        .prev:hover, .next:hover {
+            background-color: var(--primary-yellow);
+            color: var(--pure-white);
+        }
+        
+        /* Dots/Bullets */
+        .dots-container {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        
+        .dot.active, .dot:hover {
+            background-color: var(--primary-yellow);
+        }
+        
+        /* CTA-Bereich */
+        .cta-section {
+            padding: 100px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+            color: var(--dark-gray);
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .appointment-button {
+            display: inline-block;
+            padding: 15px 50px;
+            background-color: var(--pure-white);
+            color: var(--dark-gray);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--pure-white);
+        }
+        
+        .appointment-button:hover {
+            background-color: transparent;
+            color: var(--pure-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--pure-white);
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .contact-info {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content .subheading {
+                font-size: 1.4rem;
+            }
+            
+            .coaching-header h2 {
+                font-size: 2rem;
+            }
+            
+            .coaching-header h3 {
+                font-size: 1.5rem;
+            }
+            
+            .advantages-header h2 {
+                font-size: 2rem;
+            }
+            
+            .advantages-header h3 {
+                font-size: 1.5rem;
+            }
+            
+            .success-header h2 {
+                font-size: 2rem;
+            }
+            
+            .social-content h2 {
+                font-size: 2rem;
+            }
+            
+            .social-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+            
+            .products-header h2 {
+                font-size: 2rem;
+            }
+            
+            .prev, .next {
+                font-size: 18px;
+                padding: 12px;
+                height: 40px;
+                width: 40px;
+            }
+            
+            .office-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation mit DAVG Logo -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="dvag-Logo-1024x269.jpg" alt="DAVG Logo" class="logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Startseite</a></li>
+            <li><a href="#vorteile">Ihre Vorteile</a></li>
+            <li><a href="#erfolge">Kundenerfolge</a></li>
+            <li><a href="#social">Community</a></li>
+            <li><a href="#produkte">Unsere Finanzprodukte</a></li>
+            <li><a href="#termin">Termin vereinbaren</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero-Bereich -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Wie auch immer du dein Leben leben willst:</h1>
+            <p class="subheading">Wir sind dein Coach in allen Finanzfragen</p>
+            <a href="#vorteile" class="cta-button">Jetzt mehr erfahren</a>
+        </div>
+    </section>
+
+    <!-- Finanzcoaching-Bereich -->
+    <section class="finance-coaching">
+        <div class="coaching-header">
+            <h2>Finanzcoaching</h2>
+            <h3>Machen Sie mehr aus Ihrem Geld</h3>
+            <div class="rating">
+                <span class="stars">★★★★★</span> 4,89 von 5 Sterne <span>, aus über 115000 Kundenbewertungen für Finanzcoaches</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vorteile-Bereich -->
+    <section class="advantages-section" id="vorteile">
+        <div class="advantages-header">
+            <h2>Früher an Später denken</h2>
+            <h3>Das sind Ihre Vorteile</h3>
+        </div>
+        
+        <div class="advantages-container">
+            <div class="advantage-box">
+                <div class="advantage-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>Ihre Wünsche & Ziele im Fokus</h4>
+                <p>Uns geht es um Sie! Ihr Finanzcoach nimmt sich Zeit, Ihre Situation kennenzulernen und zu verstehen, was Sie erreichen möchten.</p>
+            </div>
+            
+            <div class="advantage-box">
+                <!-- Hand über Euro Icon -->
+                <div class="euro-hand-icon">
+                    <i class="fas fa-hand"></i>
+                    <i class="fas fa-euro-sign"></i>
+                </div>
+                <h4>Ganzheitliche Konzeptberatung</h4>
+                <p>Absicherung, Altersvorsorge und Vermögensaufbau gehören für uns zusammen. Gemeinsam erarbeiten wir ein allumfassendes Konzept für Ihren finanziellen Erfolg.</p>
+            </div>
+            
+            <div class="advantage-box">
+                <div class="advantage-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h4>Gemeinsam mehr erreichen</h4>
+                <p>Ihr Finanzcoach kümmert sich für Sie um alles Wichtige, weiß Rat, wenn sich etwas in Ihrem Leben verändert und hilft Ihnen, Ihre Spar- und Vorsorgeziele in die Tat umzusetzen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kundenerfolge -->
+    <section class="customer-success" id="erfolge">
+        <div class="success-header">
+            <h2>Wir helfen bereits acht Millionen Kundinnen und Kunden dabei:</h2>
+            <p>Profitieren auch Sie von unserer Expertise und Erfahrung im Finanzcoaching</p>
+        </div>
+        
+        <div class="benefits-container">
+            <div class="benefit-box">
+                <h3>Finanzielle Ziele erreichen</h3>
+                <p>ihre finanziellen Wünsche & Ziele zu erreichen</p>
+            </div>
+            
+            <div class="benefit-box">
+                <h3>Sorgenfrei leben</h3>
+                <p>sich keine Sorgen mehr um Absicherung, Altersvorsorge und Vermögensaufbau machen zu müssen</p>
+            </div>
+            
+            <div class="benefit-box">
+                <h3>Finanzüberblick behalten</h3>
+                <p>stets den Überblick über ihre Finanzen zu behalten</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Bereich -->
+    <section class="social-media-section" id="social">
+        <div class="social-content">
+            <h2>Werde Teil unserer Community</h2>
+            <h3>Wir auf Social Media</h3>
+            <p>Insights aus dem Unternehmen und dem Leben unserer Finanzcoaches: jetzt mehr erfahren!</p>
+            
+            <div class="social-icons">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-xing"></i>
+                    <span>Xing</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+            </div>
+            
+            <a href="#" class="more-info-button">Noch mehr Infos</a>
+        </div>
+    </section>
+
+    <!-- Finanzprodukte Bereich -->
+    <section class="products-section" id="produkte">
+        <div class="products-header">
+            <h2>Unsere Finanzprodukte</h2>
+            <p>Entdecken Sie unsere maßgeschneiderten Lösungen für Ihre finanzielle Zukunft</p>
+        </div>
+        
+        <div class="slideshow-container">
+            <!-- Slide 1: Lokales Büro -->
+            <div class="slide active">
+                <div class="office-card">
+                    <div class="office-header">
+                        <img src="ALL6325S01A3412021_484825054110.jpg" alt="DAVG Büro" class="office-logo">
+                        <div class="office-partner">Carmela Magno<br>Offizieller Partner der DVAG</div>
+                    </div>
+                    
+                    <h2 class="office-title">Allfinanz Deutsche Vermögensberatung</h2>
+                    <p class="office-subtitle">Früher an Später denken.</p>
+                    <div class="office-details">
+                        <p>Durch die Bank weg gut – unser Finanzcoaching.</p>
+                        <p>Ihr Partner vor Ort ist gerne persönlich für Sie da.</p>
+                    </div>
+                    <div class="office-contact">
+                        <h3>Büro Carmela Magno</h3>
+                        <p>Durlacher Str. 1<br>75172 Pforzheim</p>
+                        <p>Mobil: 0170 1654390</p>
+                        <a href="#contact" class="product-button">Termin vereinbaren</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2: Rechtsschutzversicherung -->
+            <div class="slide">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h2 class="product-title">ADVOCARD Rechtsschutz</h2>
+                    <p class="product-subtitle">Rundum geschützt in allen Rechtsfragen</p>
+                    <ul class="product-features">
+                        <li>24/7-Service mit telefonischer Rechtsberatung</li>
+                        <li>Vorsorgliche anwaltliche Beratung bis 1.000 € pro Jahr</li>
+                        <li>Rechtsschutz in Scheidungsverfahren bis 2.000 €</li>
+                        <li>Unbegrenzte Versicherungssumme in Europa</li>
+                    </ul>
+                    <a href="ADVOCARD.pdf" class="product-button" target="_blank">Details anzeigen</a>
+                </div>
+            </div>
+            
+            <!-- Slide 3: Bausparen -->
+            <div class="slide">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h2 class="product-title">Badenia Bausparen</h2>
+                    <p class="product-subtitle">Der Grundstein für Ihre Wohnträume</p>
+                    <ul class="product-features">
+                        <li>Sicher Eigenkapital aufbauen</li>
+                        <li>Attraktive staatliche Förderungen nutzen</li>
+                        <li>Jugendbonus für 15- bis 25-Jährige</li>
+                        <li>Niedrige Darlehenszinsen für die Zukunft sichern</li>
+                        <li>Flexible Rückzahlungsvarianten</li>
+                    </ul>
+                    <a href="Badenia_Bausparen.pdf" class="product-button" target="_blank">Details anzeigen</a>
+                </div>
+            </div>
+            
+            <!-- Slide 4: Staatliche Förderung -->
+            <div class="slide">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <h2 class="product-title">Staatliche Förderung für Bausparen</h2>
+                    <p class="product-subtitle">Doppelt profitieren vom Staat</p>
+                    <ul class="product-features">
+                        <li>Wohnungsbauprämie: Bis zu 10% Förderung</li>
+                        <li>Arbeitnehmer-Sparzulage: Bis zu 9% Förderung</li>
+                        <li>Für Singles und Verheiratete</li>
+                        <li>Jährliche Förderung bis zu 140 €</li>
+                        <li>Nach 7 Jahren bis zu 980 € Förderung</li>
+                    </ul>
+                    <a href="Bausparen_staatliche_Förderung.pdf" class="product-button" target="_blank">Details anzeigen</a>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Modernisierungsdarlehen -->
+            <div class="slide">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h2 class="product-title">Modernisierungsdarlehen</h2>
+                    <p class="product-subtitle">Verwirklichen Sie Ihre Wohnwünsche</p>
+                    <ul class="product-features">
+                        <li>Darlehen bis 50.000 € ohne Grundbucheintrag</li>
+                        <li>Energieeinsparungen bis zu 35% möglich</li>
+                        <li>Für Dämmung, neue Heizung, Photovoltaik</li>
+                        <li>Attraktive Finanzierung für Ihr Eigenheim</li>
+                        <li>Schnelle Umsetzung Ihrer Modernisierungspläne</li>
+                    </ul>
+                    <a href="Darlehen_Modernisieren-33812.pdf" class="product-button" target="_blank">Details anzeigen</a>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Goldrente -->
+            <div class="slide">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h2 class="product-title">Geiger Goldrente</h2>
+                    <p class="product-subtitle">Der glänzende Partner für Ihre Zukunft</p>
+                    <ul class="product-features">
+                        <li>Investition in physisches Gold ab 3.000 €</li>
+                        <li>Flexible Auszahlung zu Ihren Wunschterminen</li>
+                        <li>100% physisch hinterlegt und versichert</li>
+                        <li>Steuerfreie Gewinne nach einjähriger Haltedauer</li>
+                        <li>Währungsunabhäbgige Investition in Sachwerte</li>
+                    </ul>
+                    <a href="Geiger_Edelmetalle_Goldrente.pdf" class="product-button" target="_blank">Details anzeigen</a>
+                </div>
+            </div>
+            
+            <!-- Slide 7: Krankenzusatzversicherung -->
+            <div class="slide">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h2 class="product-title">MeinGesundheitsplan</h2>
+                    <p class="product-subtitle">Ihr maßgeschneiderter Gesundheitsschutz</p>
+                    <ul class="product-features">
+                        <li>Individuell kombinierbare Module</li>
+                        <li>Bis zu 90% Erstattung für Zahnersatz</li>
+                        <li>Professionelle Zahnreinigung bis 200 €</li>
+                        <li>Sehhilfen bis 300 € inkl. LASIK-Operationen</li>
+                        <li>Weltweiter Auslandsreiseschutz</li>
+                    </ul>
+                    <a href="Krankenzusatzversicherung_MeinGesundheitsplan.pdf" class="product-button" target="_blank">Details anzeigen</a>
+                </div>
+            </div>
+            
+            <!-- Slide 8: Kinderzukunftsplan -->
+            <div class="slide">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h2 class="product-title">Mein Zukunftsplan Kinder</h2>
+                    <p class="product-subtitle">Sichere Zukunft für Ihr Kind</p>
+                    <ul class="product-features">
+                        <li>Vermögensaufbau durch Rentenversicherung</li>
+                        <li>Kinderinvaliditätsabsicherung ab 3 Monaten</li>
+                        <li>Berufsunfähigkeitsabsicherung für Schüler</li>
+                        <li>Berufsunfähigkeits-Option ohne Gesundheitsprüfung</li>
+                        <li>Versorgerschutz bei Tod oder Berufsunfähigkeit</li>
+                    </ul>
+                    <a href="Mein_Zukunftsplan_Kinder.pdf" class="product-button" target="_blank">Details anzeigen</a>
+                </div>
+            </div>
+            
+            <!-- Slide 9: Riesterrente -->
+            <div class="slide">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h2 class="product-title">Riesterrente Strategie Plus</h2>
+                    <p class="product-subtitle">Staatlich geförderte Altersvorsorge</p>
+                    <ul class="product-features">
+                        <li>Bis zu 175 € Grundzulage + 300 € Kinderzulage</li>
+                        <li>Steuervorteile bis zu 2.100 € jährlich</li>
+                        <li>100% Beitragsgarantie</li>
+                        <li>Flexible Anlagestrategie mit Schieberegler</li>
+                        <li>Berufsunfähigkeits-Zusatzversicherung inklusive</li>
+                    </ul>
+                    <a href="Riesterrente.pdf" class="product-button" target="_blank">Details anzeigen</a>
+                </div>
+            </div>
+            
+            <!-- Slide 10: Sportpartnerschaft -->
+            <div class="slide">
+                <div class="sports-card">
+                    <h2 class="sports-title">PARTNER DES SPORTS</h2>
+                    <p class="sports-subtitle">NEUE TRIKOTS FÜR DEIN TEAM!</p>
+                    
+                    <div class="sports-content">
+                        <p>Sichere dir jetzt deinen Trikotsatz! Ich unterstütze Vereine aus unserer Region und starte auch dein Team komplett mit neuen Trikots aus.</p>
+                        
+                        <p><strong>Wir sind Partner des Sports.</strong><br>Seit 2014 statten wir den Breitensport in Deutschland aus.</p>
+                        
+                        <div class="sports-contact">
+                            <div>
+                                <p class="sports-name">Carmela Magno</p>
+                                <p class="sports-partner">Offizieller Partner der DVAG</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <p><strong>Allfinanz Deutsche Vermögensberatung</strong></p>
+                            <p>Durlacher Str. 1<br>75172 Pforzheim</p>
+                            <p>carmela.magno@allfinanz.ag</p>
+                        </div>
+                        
+                        <p class="partners-text">In Partnerschaft mit:</p>
+                        
+                        <div class="partners-container">
+                            <img src="AWO_Logo.png" alt="AWO" class="partner-logo">
+                            <img src="Generali_Logo.jpeg" alt="Generali" class="partner-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation arrows - OPTIMIZED POSITION -->
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+        
+        <!-- Dots navigation -->
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(8)"></span>
+            <span class="dot" onclick="currentSlide(9)"></span>
+            <span class="dot" onclick="currentSlide(10)"></span>
+        </div>
+    </section>
+
+    <!-- CTA-Bereich -->
+    <section class="cta-section" id="termin">
+        <div class="cta-content">
+            <h2>Starten Sie jetzt mit Ihrem persönlichen Finanzcoaching</h2>
+            <p> Regionaldirektion für Allfinanz Aktiengesellschaft DVAG
+
+
+Carmela Magno
+Durlacher Str. 1
+75172 Pforzheim
+Telefon: +49 7231 4629730
+Fax: +49 7231 4626860
+Mobil: +49 170 1654390
+carmela.magno@allfinanz.ag
+</p>
+            <a href="#contact" class="appointment-button">Termin vereinbaren</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="contact-info">
+            <p>Im Versicherungsbereich als gebundener Vermittler gemäß § 34d Abs. 7 GewO auf Provisionsbasis ausschließlich vermittelnd und beratend tätig für die Generali Deutschland Lebensversicherung, Generali Deutschland Versicherung, Generali Deutschland Krankenversicherung, Generali Pensionskasse, ADVOCARD Rechtsschutzversicherung. Darüber hinaus können in Einzelfällen geldwerte Vorteile in Form von Sachleistungen anfallen (z.B. Schulungen sowie Einladungen für die Teilnahme an kulturellen und gesellschaftlichen Veranstaltungen, Informationsmaterial, Aufmerksamkeiten).
+
+Schlichtungsstellen:,
+Verein Versicherungsombudsmann e.V.
+Postfach 080632, 10006 Berlin
+Ombudsmann Private Kranken- und Pflegeversicherung
+Postfach 060222, 10052 Berlin
+www.versicherungsombudsmann.de, www.pkv-ombudsmann.de
+
+ 
+
+Vermittlung von Bausparkassenverträgen, Vermittlung von Versicherungen als gebundener Vermittler gemäß § 34 d GewWO, Vermittlung von Energielieferungsverträge, nicht überwachungsbedürftige Vermittlung von Verträgen über den Handel mit Goldanlagenprodukten und sonstigen Edelmetallen, Vermittlung von Privatkredit und Darlehensverträgen gemäß § 34 c Absatz 1 Satz 1 Nummer 2 GewO, Vermittlung von Finanzanlagen gemäß § 34 f Abs. 1 GewO.
+
+
+
+Erlaubnis gemäß § 34c Absatz 1 Satz 1 GewO: IHK Nordschwarzwald, Dr. Brandenburg-Str. 6, 75173 Pforzheim
+
+Erlaubnis gemäß § 34f Absatz 1 GewO: IHK Nordschwarzwald, Dr. Brandenburg-Str. 6, 75173 Pforzheim
+
+
+Haftungshinweis: Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+Die Vermögensberater nehmen keine Kundengelder entgegen. Zahlungen erfolgen direkt von den Kunden an die jeweiligen Produktpartner.
+
+Informationen zur Verarbeitung Ihrer personenbezogenen Daten finden Sie unter www.datenschutz.dvag.
+
+
+</p>
+        </div>
+        <div class="copyright">
+            <p>© 2025 DAVG Finanzcoaching. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scrolling für Ankerlinks
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar Hintergrund ändern beim Scrollen
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'var(--pure-white)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.backgroundColor = 'transparent';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+        
+        // Slideshow JavaScript
+        let slideIndex = 1;
+        showSlides(slideIndex);
+        
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+        
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+            const slides = document.querySelectorAll('.products-section .slide');
+            const dots = document.querySelectorAll('.products-section .dot');
+            
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Remove active class from all dots
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show current slide and activate dot
+            slides[slideIndex-1].classList.add('active');
+            dots[slideIndex-1].classList.add('active');
+        }
+        
+        // Auto-advance slides every 15 seconds
+        setInterval(() => {
+            changeSlide(1);
+        }, 15000);
+        
+        // PDF Öffnen in neuem Tab
+        document.querySelectorAll('.product-button').forEach(button => {
+            if(button.getAttribute('href').endsWith('.pdf')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.open(this.href, '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
